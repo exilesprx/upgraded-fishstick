@@ -1,0 +1,13 @@
+[package]
+name = "rust-arduino-blink"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+panic-halt = "0.2.0"
+
+[dependencies.arduino-hal]
+git = "https://github.com/Rahix/avr-hal"
+rev = "eeef51b"
+features = ["arduino-uno"]
