@@ -6,4 +6,5 @@ RUN curl -q 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | gpg --d
   && apt -y update \
   && apt -y install just gcc-avr avrdude
 
-RUN rustup override set nightly
+RUN rustup override set nightly \
+  && rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu

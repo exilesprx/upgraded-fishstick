@@ -4,11 +4,11 @@
 use core::panic::PanicInfo;
 
 #[panic_handler]
-fn panic( info: &PanicInfo) -> ! {
+fn panic(_info: &PanicInfo) -> ! {
   loop {}
 }
 
-#[ardunio_hal::entry]
+#[arduino_hal::entry]
 fn main() -> ! {
   loop {}
 }
