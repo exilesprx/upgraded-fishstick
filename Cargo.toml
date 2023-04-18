@@ -7,10 +7,12 @@ version = "0.1.0"
 [profile.release]
 panic = "abort"
 lto = true
+opt-level = "s"
 
 [profile.dev]
 panic = "abort"
 lto = true
+opt-level = "s"
 
 [dependencies]
 panic-halt = "0.2.0"

@@ -10,5 +10,12 @@ fn panic(_info: &PanicInfo) -> ! {
 
 #[arduino_hal::entry]
 fn main() -> ! {
-  loop {}
+  let peripherals = arduino_hal::Peripherals::take().unwrap();
+  let pins = arduino_hal::pins!(peripherals);
+  let mut led = pins.d13.into_output();
+
+  loop {
+    led.toggle();
+    arduino_hal::delay_ms(1000);
+  }
 }
