@@ -19,5 +19,5 @@ panic-halt = "0.2.0"
 
 [dependencies.arduino-hal]
 git = "https://github.com/Rahix/avr-hal"
-rev = "eeef51b"
+rev = "e29a7be"
 features = ["arduino-uno"]

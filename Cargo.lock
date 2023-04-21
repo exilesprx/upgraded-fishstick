@@ -5,7 +5,7 @@ version = 3
 [[package]]
 name = "arduino-hal"
 version = "0.1.0"
-source = "git+https://github.com/Rahix/avr-hal?rev=eeef51b#eeef51bde41ab1a5ca846229e77c981d68897f5a"
+source = "git+https://github.com/Rahix/avr-hal?rev=e29a7be#e29a7be5b1fa9d490ded11e539d345af041ccef6"
 dependencies = [
  "atmega-hal",
  "avr-device",
@@ -19,7 +19,7 @@ dependencies = [
 [[package]]
 name = "atmega-hal"
 version = "0.1.0"
-source = "git+https://github.com/Rahix/avr-hal?rev=eeef51b#eeef51bde41ab1a5ca846229e77c981d68897f5a"
+source = "git+https://github.com/Rahix/avr-hal?rev=e29a7be#e29a7be5b1fa9d490ded11e539d345af041ccef6"
 dependencies = [
  "avr-device",
  "avr-hal-generic",
@@ -27,22 +27,21 @@ dependencies = [
 
 [[package]]
 name = "avr-device"
-version = "0.3.4"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "edb5cf74147f0a7ef4b7b2b5cdd6bc04e749d050cf48ed2a40048db290165db4"
+checksum = "644690f9699830f0efce38ca9d41c7ad51a6ec1829364dd272638938c953673a"
 dependencies = [
  "avr-device-macros",
  "bare-metal",
- "cfg-if 0.1.10",
- "rustversion",
+ "cfg-if 1.0.0",
  "vcell",
 ]
 
 [[package]]
 name = "avr-device-macros"
-version = "0.3.4"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "474dda7ee758065593ae9fd53c9f95a38c1f7d44fac02a4d354838a6c40070d8"
+checksum = "ba8b49941a5148cec432d5180d205871f0132f9f15b7225a9f3ad9e2bae026cb"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -52,11 +51,12 @@ dependencies = [
 [[package]]
 name = "avr-hal-generic"
 version = "0.1.0"
-source = "git+https://github.com/Rahix/avr-hal?rev=eeef51b#eeef51bde41ab1a5ca846229e77c981d68897f5a"
+source = "git+https://github.com/Rahix/avr-hal?rev=e29a7be#e29a7be5b1fa9d490ded11e539d345af041ccef6"
 dependencies = [
  "avr-device",
  "cfg-if 0.1.10",
  "embedded-hal",
+ "embedded-storage",
  "nb 0.1.3",
  "paste",
  "rustversion",
@@ -66,12 +66,9 @@ dependencies = [
 
 [[package]]
 name = "bare-metal"
-version = "0.2.5"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5deb64efa5bd81e31fcd1938615a6d98c82eafcbcd787162b6f63b91d6bac5b3"
-dependencies = [
- "rustc_version",
-]
+checksum = "f8fe8f5a8a398345e52358e18ff07cc17a568fbca5c6f73873d3a62056309603"
 
 [[package]]
 name = "cfg-if"
@@ -94,6 +91,12 @@ dependencies = [
  "nb 0.1.3",
  "void",
 ]
+
+[[package]]
+name = "embedded-storage"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "723dce4e9f25b6e6c5f35628e144794e5b459216ed7da97b7c4b66cdb3fa82ca"
 
 [[package]]
 name = "nb"
@@ -155,34 +158,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "rustc_version"
-version = "0.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "138e3e0acb6c9fb258b19b67cb8abd63c00679d2851805ea151465464fe9030a"
-dependencies = [
- "semver",
-]
-
-[[package]]
 name = "rustversion"
 version = "1.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4f3208ce4d8448b3f3e7d168a73f5e0c43a61e32930de3bceeccedb388b6bf06"
-
-[[package]]
-name = "semver"
-version = "0.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1d7eb9ef2c18661902cc47e535f9bc51b78acd254da71d375c2f6720d9a40403"
-dependencies = [
- "semver-parser",
-]
-
-[[package]]
-name = "semver-parser"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "388a1df253eca08550bef6c72392cfe7c30914bf41df5269b68cbd6ff8f570a3"
 
 [[package]]
 name = "syn"
