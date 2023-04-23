@@ -5,7 +5,8 @@ orbs:
 
 jobs:
   build:
-    image: exilesprx/rustuino:latest
+    docker:
+      - image: exilesprx/rustuino:latest
     steps:
       - checkout
       - run: cargo update
