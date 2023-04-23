@@ -7,7 +7,7 @@ executors:
   rustuino:
     parameters:
       tag:
-        default: "devel"
+        default: "latest"
         type: string
     docker:
       - image: exilesprx/rustuino:<<parameters.tag>>
@@ -23,12 +23,6 @@ commands:
           destination: build
 
 jobs:
-  devel-build:
-    executor:
-      name: rustuino
-      tag: "devel"
-    steps:
-      - update-and-build
   latest-build:
     executor:
       name: rustuino
@@ -45,7 +39,7 @@ jobs:
 workflows:
   feature:
     jobs:
-      - devel-build:
+      - latest-build:
           filters:
             branches:
               ignore:
@@ -53,22 +47,6 @@ workflows:
                 - develop
             tags:
               ignore: /v.*/
-  devel:
-    jobs:
-      - docker/publish:
-          image: exilesprx/rustuino
-          tag: devel
-          path: .docker
-          use-buildkit: true
-          filters:
-            branches:
-              only: develop
-      - devel-build:
-          requires:
-            - docker/publish
-          filters:
-            branches:
-              only: develop
   staging:
     jobs:
       - docker/publish:
@@ -76,6 +54,7 @@ workflows:
           tag: latest
           path: .docker
           use-buildkit: true
+          cache_from: exilesprx/rustuino:latest
           filters:
             branches:
               only: main
@@ -92,6 +71,7 @@ workflows:
           tag: $CIRCLE_TAG
           path: .docker
           use-buildkit: true
+          cache_from: exilesprx/rustuino:latest
           filters:
             branches:
               ignore: /.*/
