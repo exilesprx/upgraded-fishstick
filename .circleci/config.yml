@@ -6,23 +6,57 @@ orbs:
 jobs:
   build:
     docker:
-      - image: exilesprx/rustuino:latest
-    steps:
+      - image: exilesprx/rustuino:devel
+    steps: &steps-build
       - checkout
       - run: cargo update
       - run: cargo build
       - store_artifacts:
           path: target
           destination: build
+  release-build:
+    docker:
+      - image: exilesprx/rustuino:$CIRCLE_TAG
+    steps:
+      <<: *steps-build
 
 
 workflows:
-  image-and-build:
+  feature:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - main
+                - develop
+  devel:
     jobs:
       - docker/publish:
           image: exilesprx/rustuino
-          tag: latest
+          tag: devel
           path: .docker
+          filters:
+            branches:
+              only: develop
       - build:
           requires:
             - docker/publish
+          filters:
+            branches:
+              only: develop
+  release:
+    jobs:
+      - docker/publish:
+          image: exilesprx/rustuino
+          tag: $CIRCLE_TAG
+          path: .docker
+          filters:
+            tags:
+              only: /v.*/
+      - release-build:
+          requires:
+            - docker/publish
+          filters:
+            tags:
+              only: /v.*/
