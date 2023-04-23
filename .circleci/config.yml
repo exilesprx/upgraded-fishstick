@@ -23,5 +23,5 @@ workflows:
           tag: latest
           path: .docker
       - build
-        -requires:
-          - docker/publish
+          requires:
+            - docker/publish
