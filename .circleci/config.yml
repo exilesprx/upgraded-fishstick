@@ -22,6 +22,6 @@ workflows:
           image: exilesprx/rustuino
           tag: latest
           path: .docker
-      - build
+      - build:
           requires:
             - docker/publish
