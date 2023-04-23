@@ -34,6 +34,8 @@ workflows:
               ignore:
                 - main
                 - develop
+            tags:
+              ignore: /v.*/
   devel:
     jobs:
       - docker/publish:
@@ -43,12 +45,16 @@ workflows:
           filters:
             branches:
               only: develop
+            tags:
+              ignore: /v.*/
       - build:
           requires:
             - docker/publish
           filters:
             branches:
               only: develop
+            tags:
+              ignore: /v.*/
   release:
     jobs:
       - docker/publish:
@@ -56,11 +62,15 @@ workflows:
           tag: $CIRCLE_TAG
           path: .docker
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /v.*/
       - release-build:
           requires:
             - docker/publish
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /v.*/
