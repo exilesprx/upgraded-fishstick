@@ -1,0 +1,14 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@2.2.0
+
+
+workflows:
+  image-and-build:
+    jobs:
+      - docker/publish:
+          dockerfile: .docker/Dockerfile
+          image: exilesprx/rustuino
+          tag: latest
+          path: . image

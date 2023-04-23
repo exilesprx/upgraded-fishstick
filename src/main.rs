@@ -3,6 +3,8 @@
 
 use core::panic::PanicInfo;
 
+use arduino_hal::Peripherals;
+
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
   loop {}
@@ -10,7 +12,7 @@ fn panic(_info: &PanicInfo) -> ! {
 
 #[arduino_hal::entry]
 fn main() -> ! {
-  let peripherals = arduino_hal::Peripherals::take().unwrap();
+  let peripherals: Peripherals = Peripherals::take().unwrap();
   let pins = arduino_hal::pins!(peripherals);
   let mut led = pins.d13.into_output();
 
