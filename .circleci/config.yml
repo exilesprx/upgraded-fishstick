@@ -12,40 +12,35 @@ executors:
     docker:
       - image: exilesprx/rustuino:<<parameters.tag>>
 
+commands:
+  update-and-build:
+    steps:
+      - checkout
+      - run: cargo update
+      - run: cargo build
+      - store_artifacts:
+          path: target
+          destination: build
+
 jobs:
   devel-build:
     executor:
       name: rustuino
       tag: "devel"
     steps:
-      - checkout
-      - run: cargo update
-      - run: cargo build
-      - store_artifacts:
-          path: target
-          destination: build
+      - update-and-build
   latest-build:
     executor:
       name: rustuino
       tag: "latest"
     steps:
-      - checkout
-      - run: cargo update
-      - run: cargo build
-      - store_artifacts:
-          path: target
-          destination: build
+      - update-and-build
   release-build:
     executor:
       name: rustuino
       tag: $CIRCLE_TAG
     steps:
-      - checkout
-      - run: cargo update
-      - run: cargo build
-      - store_artifacts:
-          path: target
-          destination: build
+      - update-and-build
 
 workflows:
   feature:
