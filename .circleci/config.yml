@@ -45,16 +45,25 @@ workflows:
           filters:
             branches:
               only: develop
-            tags:
-              ignore: /v.*/
       - build:
           requires:
             - docker/publish
           filters:
             branches:
               only: develop
-            tags:
-              ignore: /v.*/
+  staging:
+    jobs:
+      - docker/publish:
+          image: exilesprx/rustuino
+          tag: latest
+          path: .docker
+          filters:
+            branches:
+              only: main
+      - build:
+          filters:
+            branches:
+              only: main
   release:
     jobs:
       - docker/publish:
