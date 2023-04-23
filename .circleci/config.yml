@@ -3,10 +3,31 @@ version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
 
-jobs:
-  build:
+executors:
+  rustuino:
+    parameters:
+      tag:
+        default: "devel"
+        type: string
     docker:
-      - image: exilesprx/rustuino:devel
+      - image: exilesprx/rustuino:<<parameters.tag>>
+
+jobs:
+  devel-build:
+    executor:
+      name: rustuino
+      tag: "devel"
+    steps:
+      - checkout
+      - run: cargo update
+      - run: cargo build
+      - store_artifacts:
+          path: target
+          destination: build
+  latest-build:
+    executor:
+      name: rustuino
+      tag: "latest"
     steps:
       - checkout
       - run: cargo update
@@ -15,8 +36,9 @@ jobs:
           path: target
           destination: build
   release-build:
-    docker:
-      - image: exilesprx/rustuino:$CIRCLE_TAG
+    executor:
+      name: rustuino
+      tag: $CIRCLE_TAG
     steps:
       - checkout
       - run: cargo update
@@ -28,7 +50,7 @@ jobs:
 workflows:
   feature:
     jobs:
-      - build:
+      - devel-build:
           filters:
             branches:
               ignore:
@@ -45,7 +67,7 @@ workflows:
           filters:
             branches:
               only: develop
-      - build:
+      - devel-build:
           requires:
             - docker/publish
           filters:
@@ -60,7 +82,7 @@ workflows:
           filters:
             branches:
               only: main
-      - build:
+      - latest-build:
           requires:
             - docker/publish
           filters:
