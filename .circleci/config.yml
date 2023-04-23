@@ -3,6 +3,17 @@ version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
 
+jobs:
+  build:
+    image: exilesprx/rustuino:latest
+    steps:
+      - checkout
+      - run: cargo update
+      - run: cargo build
+      - store_artifacts:
+          path: target
+          destination: build
+
 
 workflows:
   image-and-build:
@@ -11,3 +22,6 @@ workflows:
           image: exilesprx/rustuino
           tag: latest
           path: .docker
+      - build
+        -requires:
+          - docker/publish
