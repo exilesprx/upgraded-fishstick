@@ -61,6 +61,8 @@ workflows:
             branches:
               only: main
       - build:
+          requires:
+            - docker/publish
           filters:
             branches:
               only: main
