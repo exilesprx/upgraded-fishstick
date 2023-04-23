@@ -59,6 +59,7 @@ workflows:
           image: exilesprx/rustuino
           tag: devel
           path: .docker
+          use-buildkit: true
           filters:
             branches:
               only: develop
@@ -74,6 +75,7 @@ workflows:
           image: exilesprx/rustuino
           tag: latest
           path: .docker
+          use-buildkit: true
           filters:
             branches:
               only: main
@@ -89,6 +91,7 @@ workflows:
           image: exilesprx/rustuino
           tag: $CIRCLE_TAG
           path: .docker
+          use-buildkit: true
           filters:
             branches:
               ignore: /.*/
