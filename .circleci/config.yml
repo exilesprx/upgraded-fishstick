@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       - image: exilesprx/rustuino:devel
-    steps: &steps-build
+    steps:
       - checkout
       - run: cargo update
       - run: cargo build
@@ -18,8 +18,12 @@ jobs:
     docker:
       - image: exilesprx/rustuino:$CIRCLE_TAG
     steps:
-      <<: *steps-build
-
+      - checkout
+      - run: cargo update
+      - run: cargo build
+      - store_artifacts:
+          path: target
+          destination: build
 
 workflows:
   feature:
