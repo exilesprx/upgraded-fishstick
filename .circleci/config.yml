@@ -18,9 +18,6 @@ commands:
       - checkout
       - run: cargo update
       - run: cargo build
-      - store_artifacts:
-          path: target
-          destination: build
 
 jobs:
   latest-build:
