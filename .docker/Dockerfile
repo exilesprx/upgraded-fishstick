@@ -1,4 +1,4 @@
-FROM rust:1.74.1-bookworm
+FROM rust:1.75.0-bookworm
 
 RUN apt-get -y update \
   && apt-get -y install apt-transport-https avr-libc gcc-avr avrdude libudev-dev build-essential pkg-config
