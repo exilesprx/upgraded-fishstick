@@ -15,7 +15,7 @@ lto = true
 opt-level = "s"
 
 [dependencies]
-panic-halt = "0.2.0"
+panic-halt = "1.0.0"
 
 [dependencies.arduino-hal]
 git = "https://github.com/Rahix/avr-hal"
