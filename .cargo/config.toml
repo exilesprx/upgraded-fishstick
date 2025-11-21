@@ -3,3 +3,14 @@ target = "avr-atmega328p.json"
 
 [unstable]
 build-std = ["core"]
+
+[target.avr-atmega328p]
+# These flags pass the linker argument `-mmcu=atmega328p`
+# which tells the linker (and often the compiler backend) the specific chip to target.
+rustflags = [
+    "-C", "link-arg=-mmcu=atmega328p",
+    "-C", "target-cpu=atmega328p",
+]
+
+# It ensures the 'atmega328p' name is available to the rustc code generation phase.
+rustc-link-arg-env = { name = "MCU_NAME", value = "atmega328p" }
