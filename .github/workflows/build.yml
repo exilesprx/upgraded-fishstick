@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: rust:1.91.0-bookworm
+    name: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          apt-get -y update
+          apt-get -y install apt-transport-https avr-libc gcc-avr avrdude libudev-dev build-essential pkg-config
+      - name: Cargo update
+        run: cargo update
+      - name: Cargo build
+        run: cargo build
