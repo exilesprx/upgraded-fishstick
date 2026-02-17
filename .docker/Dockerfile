@@ -1,4 +1,4 @@
-FROM rust:1.91.1-slim
+FROM rustlang/rust:nightly-slim
 
 RUN apt-get -y update \
   && apt-get -y install \
