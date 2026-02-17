@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: rust:1.91.1-slim
+      image: rustlang/rust:nightly-slim
     name: build
     steps:
       - uses: actions/checkout@v4
