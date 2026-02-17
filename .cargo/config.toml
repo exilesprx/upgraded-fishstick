@@ -3,6 +3,7 @@ target = "avr-atmega328p.json"
 
 [unstable]
 build-std = ["core"]
+json-target-spec = true
 
 [target.avr-atmega328p]
 # These flags pass the linker argument `-mmcu=atmega328p`
