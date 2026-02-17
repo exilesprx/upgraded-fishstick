@@ -1,4 +1,4 @@
-FROM rust:1.93.0-slim
+FROM rust:1.93.1-slim
 
 RUN apt-get -y update \
   && apt-get -y install \
